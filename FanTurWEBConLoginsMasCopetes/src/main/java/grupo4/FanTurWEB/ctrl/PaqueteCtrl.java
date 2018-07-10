@@ -3,6 +3,7 @@ package grupo4.FanTurWEB.ctrl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import grupo4.FanTurWEB.model.Evento;
 import grupo4.FanTurWEB.model.Hotel;
 import grupo4.FanTurWEB.model.Paquete;
 import grupo4.FanTurWEB.model.dao.interfaces.EventoDao;
+import grupo4.FanTurWEB.model.dao.interfaces.HotelDao;
 
 @Named
 @ViewScoped
@@ -37,12 +39,40 @@ public class PaqueteCtrl extends Ctrl<Paquete> implements Serializable{
 	
 	private List<Evento> eventos;
 	
-	private List<Evento> eventosAsignados = new ArrayList<Evento>();
+	private List<Evento> eventosAsignados;
 	
-	private EventoCtrl eventoCtrl;
+	//private EventoCtrl eventoCtrl;
 	
 	@EJB
 	private EventoDao eventoEJB;
+	
+	private List<Hotel> hoteles;
+	
+	private List<Hotel> hotelesAsignados;
+	
+	@EJB
+	private HotelDao hotelEJB;
+	
+	
+	
+	public List<Hotel> getHoteles() {
+		return hoteles;
+	}
+	
+	public void setHoteles(List<Hotel> hoteles) {
+		this.hoteles = hoteles;
+	}
+	
+	
+	
+	public List<Hotel> getHotelesAsignados() {
+		return hotelesAsignados;
+	}
+	
+	public void setHotelesAsignados(List<Hotel> hotelesAsignados) {
+		this.hotelesAsignados = hotelesAsignados;
+	}
+	
 	
 	
 	public List<Evento> getEventosAsignados() {
@@ -52,15 +82,19 @@ public class PaqueteCtrl extends Ctrl<Paquete> implements Serializable{
 	public void setEventosAsignados(List<Evento> eventosAsignados) {
 		this.eventosAsignados = eventosAsignados;
 	}
-
-	public EventoCtrl getEventoCtrl() {
-		return eventoCtrl;
-	}
-
-	public void setEventoCtrl(EventoCtrl eventoCtrl) {
-		this.eventoCtrl = eventoCtrl;
-	}
-
+	
+	
+	
+//	public EventoCtrl getEventoCtrl() {
+//		return eventoCtrl;
+//	}
+//
+//	public void setEventoCtrl(EventoCtrl eventoCtrl) {
+//		this.eventoCtrl = eventoCtrl;
+//	}
+	
+	
+	
 	public List<Evento> getEventos() {
 		return eventos;
 	}
@@ -112,13 +146,20 @@ public class PaqueteCtrl extends Ctrl<Paquete> implements Serializable{
 		modelObj.setAlojamiento(alojamiento);
 		modelList = new ArrayList<Paquete> (this.getAll());
 		eventos = new ArrayList<Evento> (eventoEJB.findAll());
+		hoteles = new ArrayList<Hotel> (hotelEJB.findAll());
+		hotelesAsignados = new ArrayList<Hotel>();
+		eventosAsignados = new ArrayList<Evento>();
 	}
-
+	
+	
+	
 	@Override
 	public String getId(Paquete paquete) {
 		return String.valueOf(paquete.getId());
 	}
-
+	
+	
+	
 	@Override
 	protected Class<Paquete> getClase() {
 		return Paquete.class;
@@ -127,7 +168,29 @@ public class PaqueteCtrl extends Ctrl<Paquete> implements Serializable{
 	
 	
 	public String crear() {
+		
+	    for (ListIterator<Evento> iterator = eventosAsignados.listIterator(); iterator
+	            .hasNext();) {
+	        Evento event = iterator.next();
+	        modelObj.addEvento(event);
+	    }
+	    
+	    for (ListIterator<Hotel> iteratorHotel = hotelesAsignados.listIterator(); iteratorHotel
+	            .hasNext();) {
+	        Hotel hot = iteratorHotel.next();
+	        modelObj.getAlojamiento().addHotel(hot);
+	    }
+		
 		this.create();
+		
+		eventos = new ArrayList<Evento> (eventoEJB.findAll());
+		hoteles = new ArrayList<Hotel> (hotelEJB.findAll());
+		hotelesAsignados = new ArrayList<Hotel>();
+		eventosAsignados = new ArrayList<Evento>();
+		modelObj =  new Paquete();
+		alojamiento = new Alojamiento();
+		modelObj.setAlojamiento(alojamiento);
+		
 		return "gestionarPaquetes.xhtml?faces-redirect=true";
 	}
 	
@@ -166,50 +229,85 @@ public class PaqueteCtrl extends Ctrl<Paquete> implements Serializable{
 	
 	
 	public void agregarHotel() {
-		//logger.info("lo que tiene nombreHotel:" + nombreHotel);
-		//Hotel telo = hotelCtrl.getByNombre(nombreHotel);
 		logger.info("El nombre del telo seleccionado: " + nombreHotel );
 		
 		Hotel hotel = this.getHotelByNombre(nombreHotel);
 		
 		logger.info("El hotel que trajo el metodo getHotelByNombre tiene el nombre: " + hotel.getNombre());
 		
-		modelObj.getAlojamiento().addHotel(hotel);
-		
+		hotelesAsignados.add(hotel);
 		logger.info("Se ha añadido el hotel");
+		
+	    for (ListIterator<Hotel> iterator = hoteles.listIterator(); iterator
+	            .hasNext();) {
+	        int z = iterator.next().getId();
+	        if (z == hotel.getId()) {
+	            iterator.remove();;
+	        }
+	    }
+		
 	}
+	
 	
 	
 	public void agregarEvento() {
 		logger.info("El id del evento seleccionado: " + String.valueOf(evento_id) );
 		Evento evento = this.getEventoById(evento_id);
 		logger.info("El evento que trajo el metodo getEventoById tiene la descripcion: " + evento.getDescripcion());
-		modelObj.addEvento(evento);
+		//modelObj.addEvento(evento);
 		eventosAsignados.add(evento);
 		logger.info("Se ha añadido el evento");
-		
-		int i = 0;
-		for (Evento e : eventos) {
-			logger.info("Entra en el for");
-			
-			if(e.getId() == evento_id) {
-				
-				logger.info("Entra en el if()");
-				
-				eventos.remove(i);
-				
-				logger.info("Removió el evento");
-			}
-			
-			i++;
-			logger.info("Incrementa el índice");
-		}
+	    
+	    for (ListIterator<Evento> iterator = eventos.listIterator(); iterator
+	            .hasNext();) {
+	        int z = iterator.next().getId();
+	        if (z == evento_id) {
+	            iterator.remove();;
+	        }
+	    }
 	}
+	
+	
 	
 	
 	public String borrar(int id) {
 		this.delete(id);
 		return "gestionarPaquetes.xhtml?faces-redirect=true";
+	}
+	
+	
+	
+	
+	public void removerEvento(int id) {
+	    for (ListIterator<Evento> iterator = eventosAsignados.listIterator(); iterator
+	            .hasNext();) {
+	    	Evento even = iterator.next();
+	        int z = even.getId();
+	        if (z == id) {
+	            iterator.remove();
+	            eventos.add(even);
+	        }
+	        
+	        logger.info("El metodo removerEvento() funcó..");
+	        
+	    }
+	}
+	
+	
+	
+	public void removerHotel(int id) {
+	    for (ListIterator<Hotel> iterator = hotelesAsignados.listIterator(); iterator
+	            .hasNext();) {
+	    	Hotel hot = iterator.next();
+	        int z = hot.getId();
+	        if (z == id) {
+	            iterator.remove();
+	            hoteles.add(hot);
+	        }
+	        
+	        logger.info("El metodo removerHotel() funcó..");
+	        
+	    }
 	}
 	
 	

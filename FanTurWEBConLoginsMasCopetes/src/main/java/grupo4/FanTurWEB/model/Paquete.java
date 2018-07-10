@@ -25,7 +25,7 @@ public class Paquete {
 	
 	private int cantidad;
 	
-	@OneToMany(mappedBy="paquete",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="paquete",fetch  =FetchType.EAGER)
 	private Set<Pasaje> pasajes;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
