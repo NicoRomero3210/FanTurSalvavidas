@@ -1,6 +1,8 @@
 package grupo4.FanTurWEB.model;
 
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,20 +10,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+
 public class Reserva {
 	
 	@Id 
 	@GeneratedValue
 	private int id;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name= "idCliente")
+	@JsonBackReference
 	private Cliente cliente;
 	
 	private Date fechaReserva, fechaPago;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PAQUETE_FK")
 	private Paquete paquete;
 	
@@ -50,7 +59,7 @@ public class Reserva {
 	public void setId(int idReserva) {
 		this.id = idReserva;
 	}
-
+	
 	public Cliente getCliente() {
 		return cliente;
 	}

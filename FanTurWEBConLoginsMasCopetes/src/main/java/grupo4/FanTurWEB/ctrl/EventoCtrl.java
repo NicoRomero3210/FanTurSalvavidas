@@ -25,6 +25,8 @@ public class EventoCtrl extends Ctrl<Evento> implements Serializable{
 
 	@PostConstruct
 	private void init() {
+		afterCreate = "gestionarEvento.xhtml?faces-redirect=true";
+		afterUpdate = "gestionarEvento.xhtml?faces-redirect=true";
 		modelObj =  new Evento();
 		client = ClientBuilder.newClient();
 		webTarget = client.target("http://localhost:8080/FanTurWEB/rest/eventos");

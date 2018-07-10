@@ -13,6 +13,7 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,7 +27,7 @@ import grupo4.FanTurWEB.model.dao.interfaces.HotelDao;
 import grupo4.FanTurWEB.model.dao.interfaces.PaqueteDao;
 
 @Named("paqueteCont")
-@SessionScoped
+@ViewScoped
 public class PaqueteCont implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -40,6 +41,7 @@ public class PaqueteCont implements Serializable{
 	@EJB
 	private AlojamientoDao alojamientoEJB;
 	private int id;
+	private List<Paquete> todoslospaquetes;
 	
 	public String getServicio() {
 		return servicio;
@@ -95,10 +97,19 @@ public class PaqueteCont implements Serializable{
 		eventos2 = new HashSet<Evento>();
 		hoteles = hotelEJB.findAll();
 		eventos = eventoEJB.findAll();
+		todoslospaquetes = new ArrayList<Paquete>(paqueteEJB.findAll());
 	}
 	
 	public Paquete getPaquete() {
 		return paquete;
+	}
+
+	public List<Paquete> getTodoslospaquetes() {
+		return todoslospaquetes;
+	}
+
+	public void setTodoslospaquetes(List<Paquete> todoslospaquetes) {
+		this.todoslospaquetes = todoslospaquetes;
 	}
 
 	public void setPaquete(Paquete paquete) {
@@ -188,6 +199,7 @@ public class PaqueteCont implements Serializable{
 		paquete.setEventos(eventos2);
 		paqueteEJB.update(paquete.getId(),paquete);
 		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		todoslospaquetes = new ArrayList<Paquete>(paqueteEJB.findAll());
 		return "MostrarHoteles.xhtml";
 	}
 }

@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -22,7 +25,10 @@ public class Alojamiento {
 	private String servicio;
 	private int noches;
 	private double precio;
-	@OneToMany(mappedBy="aloj",fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="Alojamiento_Hotel",
+	 joinColumns=@JoinColumn(name="ID_ALOJAMIENTO"),
+	 inverseJoinColumns=@JoinColumn(name="ID_HOTEL"))
 	private Set<Hotel> hoteles;
 	
 	public Alojamiento() {

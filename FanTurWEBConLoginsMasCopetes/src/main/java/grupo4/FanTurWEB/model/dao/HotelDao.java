@@ -22,7 +22,7 @@ public class HotelDao extends AbstractDao<Hotel, Integer> implements grupo4.FanT
 	@Override
 	public void update(Integer id, Hotel nuevo) {
 		Hotel actual = this.findById(id);
-		actual.setAloj(nuevo.getAloj());
+		
 		actual.setContacto(nuevo.getContacto());
 		actual.setNombre(nuevo.getNombre());
 		actual.setUbicacion(nuevo.getUbicacion());

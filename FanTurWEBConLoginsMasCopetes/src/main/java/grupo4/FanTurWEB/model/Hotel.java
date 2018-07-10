@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Hotel {
 	
@@ -30,19 +32,16 @@ public class Hotel {
 	@JoinColumn(name = "UBICACION_FK")
 	private Ubicacion ubicacion;
 	
-	@ManyToOne(cascade=CascadeType.REMOVE)
-	@JoinColumn(name="idAlojamiento")	
-	private Alojamiento aloj;
 	
 	public Hotel() {
 		super();
 	}
 
-	public Hotel(String nombre, Contacto contacto, Alojamiento aloj, Ubicacion ubicacion) {
+	public Hotel(String nombre, Contacto contacto,  Ubicacion ubicacion) {
 		super();
 		this.nombre = nombre;
 		this.contacto = contacto;
-		this.aloj = aloj;
+		
 		this.ubicacion = ubicacion;
 	}
 
@@ -66,13 +65,7 @@ public class Hotel {
 		this.contacto = contacto;
 	}
 
-	public Alojamiento getAloj() {
-		return aloj;
-	}
-
-	public void setAloj(Alojamiento aloj) {
-		this.aloj = aloj;
-	}
+	
 	
 	public Ubicacion getUbicacion() {
 		return ubicacion;

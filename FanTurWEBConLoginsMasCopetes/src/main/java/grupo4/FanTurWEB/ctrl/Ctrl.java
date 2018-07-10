@@ -26,6 +26,9 @@ public abstract class Ctrl<Model> {
 	protected Model modelObj;
 	protected List<Model> modelList;
 	protected int id;
+	protected String afterUpdate;
+	protected String afterCreate;
+	protected String afterDelete;
 	
 	// afterChabon
 	
@@ -80,15 +83,17 @@ public abstract class Ctrl<Model> {
 		return response.readEntity(new GenericType<Set<Model>>() {});
 	}
 	
-	public void create() {
+	public String create() {
 		invocation = webTarget.request().buildPost(Entity.entity(modelObj, MediaType.APPLICATION_JSON));
 		response = invocation.invoke();
+		return afterCreate;
 	}
 	
-	public void update(int objId,Model object) {
+	public String update(int objId,Model object) {
 		id=objId;
 		invocation = webTarget.path(String.valueOf(id)).request().buildPut(Entity.json(modelObj));
 		response = invocation.invoke();
+		return afterUpdate;
 	}
 	
 	public void delete(int id) {

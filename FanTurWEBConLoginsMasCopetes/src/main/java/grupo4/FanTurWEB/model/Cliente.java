@@ -1,7 +1,9 @@
 package grupo4.FanTurWEB.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,20 +17,27 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Past;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+
 public class Cliente extends User {
 	
 	//@Past
 	@Temporal(TemporalType.DATE)
 	private Date nacimiento;
 
-	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER)
-	private Set<Reserva> reservas;
+	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonManagedReference	
+	private List<Reserva> reservas;
 	
 	@Transient
 	private Reserva reserva;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idContacto")
 	private Contacto contacto;
 	
@@ -50,7 +59,7 @@ public class Cliente extends User {
 		this.nacimiento = nacimiento;
 	}
 
-	public Set<Reserva> getReservas() {
+	public List<Reserva> getReservas() {
 		return reservas;
 	}
 	
@@ -62,12 +71,12 @@ public class Cliente extends User {
 		this.contacto = contacto;
 	}
 
-	public void reservar(Paquete paquete) {
+	public void reservar(Paquete paquete, Reserva reserva) {
 		reserva = Reserva.createReserva(paquete, this);
 		if (reserva != null) {
 			if (this.reservas == null) {
-				this.reservas = new HashSet<Reserva>();
-			}
+				this.reservas = new ArrayList<Reserva>();
+			}			
 			this.reservas.add(reserva);
 		}
 	}

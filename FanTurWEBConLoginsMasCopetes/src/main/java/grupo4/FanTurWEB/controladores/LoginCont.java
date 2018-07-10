@@ -107,7 +107,7 @@ public class LoginCont implements Serializable {
 		cliente = new Cliente();
 		contacto = new Contacto();
 		clienteResguardo = new Cliente();
-		adminResguardo = new Admin();
+		adminResguardo = new Admin();		
 	}
 	
 	
@@ -129,15 +129,15 @@ public class LoginCont implements Serializable {
 			}
 			
 			if(clienteEJB.findByUserLista(usuario).isEmpty() != true) {
-				request.login(usuario, password);
 				clienteResguardo = clienteEJB.findByUserLista(usuario).get(0);
-				redireccion = "user/cards.xhtml";
+				request.login(usuario, password);				
+				redireccion = "user/user-profile.xhtml?faces-redirect=true";
 				return redireccion;
 			}else {
 				if(adminEJB.findByUserLista(usuario).isEmpty() != true) {
 					adminResguardo = adminEJB.findByUserLista(usuario).get(0);
 					request.login(usuario, password);					
-					redireccion = "user-profile.xhtml";
+					redireccion = "admin/user-profile.xhtml?faces-redirect=true";
 					return redireccion;
 				}else {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Usuario no Regitrado"));
@@ -166,6 +166,16 @@ public class LoginCont implements Serializable {
 		} catch (ServletException e) {
 			logger.error("Logout error: " + e.getMessage());
 		}
+	}
+	
+	public void modificarAdmin() {
+		adminEJB.update(adminResguardo.getId(), adminResguardo);		
+		this.cerrarSesion();
+	}
+	
+	public void modificarCliente() {
+		clienteEJB.update(clienteResguardo.getId(), clienteResguardo);		
+		this.cerrarSesion();
 	}
 
 }

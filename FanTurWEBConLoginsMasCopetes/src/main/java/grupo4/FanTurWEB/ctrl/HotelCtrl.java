@@ -31,6 +31,8 @@ public class HotelCtrl extends Ctrl<Hotel> implements Serializable{
 	
 	@PostConstruct
 	private void init() {
+		afterUpdate = "gestionarHoteles.xhtml?faces-redirect=true";
+		afterCreate = "gestionarHoteles.xhtml?faces-redirect=true";
 		modelObj =  new Hotel();
 		client = ClientBuilder.newClient();
 		webTarget = client.target("http://localhost:8080/FanTurWEB/rest/hoteles");

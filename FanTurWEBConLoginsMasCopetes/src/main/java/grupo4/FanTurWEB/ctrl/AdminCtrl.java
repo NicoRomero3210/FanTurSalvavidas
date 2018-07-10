@@ -31,13 +31,8 @@ public class AdminCtrl extends Ctrl<Admin> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(AdminCtrl.class);
-	
 	private String nombre;
-
-//	@EJB
-//	private AdminDao adminEJB;
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -52,6 +47,8 @@ public class AdminCtrl extends Ctrl<Admin> implements Serializable {
 
 	@PostConstruct
 	private void init() {
+		afterCreate = "registrationAdmin.xhtml?faces-redirect=true";
+		afterUpdate = "../login.xhtml?faces-redirect=true";
 		modelObj = new Admin();
 		client = ClientBuilder.newClient();
 		webTarget = client.target("http://localhost:8080/FanTurWEB/rest/admin");
@@ -68,41 +65,6 @@ public class AdminCtrl extends Ctrl<Admin> implements Serializable {
 		return String.valueOf(admin.getId());
 	}
 
-	// public String crear() {
-	// logger.info("Se llama a crear()");
-	//
-	// //ESTO DA ERROR DE STACK OVERFLOW
-	//
-	// String nombre =
-	// FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-	//
-	// logger.info("lo que devuelve getUserPrincipal().getName(): " + nombre);
-	//
-	// List<Admin> listaAdminEnSesion = adminEJB.findByUser(nombre);
-	//
-	// Admin adminEnSesion = listaAdminEnSesion.get(0);
-	//
-	// logger.info("Se va a setear en el campo registradoPor: " + adminEnSesion);
-	//
-	//
-	// //ESTO SI ES LO QUE DA BUCLE INFINITO.. POSTA..
-	// modelObj.setRegistradoPor(adminEnSesion);
-	//
-	// modelObj.setRol("ADMINISTRATOR");
-	//
-	// logger.info("Se seteó el admin en sesión..");
-	//
-	// invocation = webTarget.request().buildPost(Entity.entity(modelObj,
-	// MediaType.APPLICATION_JSON));
-	// response = invocation.invoke();
-	//
-	//
-	//
-	// return "/admin/indexAdmin.xhtml";
-	//
-	// }
-
-	// Tuto's stuff
 	public Admin getByUser(String user) {
 		invocation = webTarget.path(user).request().buildGet();
 		response = invocation.invoke();
@@ -111,18 +73,17 @@ public class AdminCtrl extends Ctrl<Admin> implements Serializable {
 			
 	}
 	
-	public void crear() {
+	public String crear() {
 		String nombre  = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
 		Admin adminEnSesion = this.getByUser(nombre);
 		modelObj.setRegistradoPor(adminEnSesion);
-		this.create();		
+		return this.create();		
 	}
 	
 	public String modificar() {
 		String nombre  = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
 		Admin adminEnSesion = this.getByUser(nombre);
-		this.update(adminEnSesion.getId(), modelObj);	
-		return "login.xhtml?faces-redirect=true";
+		return this.update(adminEnSesion.getId(), modelObj);	
 	}
 		
 		
