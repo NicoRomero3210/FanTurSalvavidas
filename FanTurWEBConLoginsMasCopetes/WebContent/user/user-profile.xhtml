@@ -2,7 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"> 
 
 <h:head>
 
@@ -391,7 +394,7 @@
                                     <div class="col-xs-12 col-sm-2 col-md-2 dashboard-nav">
                                         <ul class="nav nav-tabs nav-stacked text-center">
                                             <li class="active"><a href="#"><span><i class="fa fa-user"></i></span>Mi Perfil</a></li>
-                                            <li><a href="reservarPaquetes"><span><i class="fa fa-cogs"></i></span>Paquetes Disponibles</a></li>                                         
+                                            <li><a href="reservarPaquetes.xhtml"><span><i class="fa fa-cogs"></i></span>Paquetes Disponibles</a></li>                                         
                                             <li><a href="verReservas.xhtml"><span><i class="fa fa-briefcase"></i></span>Mis Reservas</a></li>
                                             <!-- li><a href="wishlist.xhtml"><span><i class="fa fa-heart"></i></span>Wishlist</a></li-->
                                             <!--  li><a href="cards.xhtml"><span><i class="fa fa-credit-card"></i></span>My Cards</a></li-->
@@ -561,10 +564,24 @@
                                 <h:inputText value="#{loginBean.clienteResguardo.apellido}" a:placeholder="Apellido" class="form-control"  />
                             </div><!-- end form-group -->
                             
-                            <div class="form-group">
+                                   <div class="form-group">
+                                <h:outputLabel value="Fecha De Nacimiento" />
+                                <h:inputText value="#{loginBean.clienteResguardo.nacimiento}" a:placeholder="Nacimiento" class="form-control"  />
+                            </div><!-- end form-group --> 
+                            
+                             <div class="form-group">
                                 <h:outputLabel value="Usuario" />
-                                <h:inputText value="#{loginBean.clienteResguardo.user}" a:placeholder="Usuario" class="form-control"  />
-                            </div><!-- end form-group -->                           
+                                <h:inputText value="#{loginBean.clienteResguardo.user}" a:placeholder="Nacimiento" class="form-control"  />
+                            </div><!-- end form-group --> 
+                            
+                             <div class="form-group">
+                                <h:outputLabel value="Contraseña nueva" />
+                                <h:inputText value="#{loginBean.clienteResguardo.password}" a:placeholder="Nacimiento" class="form-control"  />
+                            </div><!-- end form-group --> 
+                            
+                                              
+                                   
+                                                    
                             
                          <h:form>                           
                             <h:commandButton value="Guardar Cambios" styleClass="btn btn-orange" actionListener="#{loginBean.modificarCliente()}" />

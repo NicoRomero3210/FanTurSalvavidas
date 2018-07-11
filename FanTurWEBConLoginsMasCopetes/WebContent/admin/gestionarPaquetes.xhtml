@@ -591,7 +591,7 @@
 														class="img-responsive" alt="card-img" /></li>
 													<li class="card-links"><h:form>
 															<a class="btn" jsfc="h:commandLink" type="button"
-																actionListener="#{eventoCtrl.setId(evento.id)}"> <f:passThroughAttribute
+																actionListener="#{eventoCtrl.empezarModificacion(paquete)}"> <f:passThroughAttribute
 																	name="data-toggle" value="modal" /> <f:passThroughAttribute
 																	name="data-target" value="#edit-card" /> <f:ajax /> <span><i
 																	class="fa fa-pencil"></i></span>
@@ -1218,7 +1218,7 @@
 
 						<h:form>
 							<p:commandButton value="Guardar Cambios" styleClass="btn btn-orange"
-								action="#{paqueteCtrl.crear()}" />
+								action="#{paqueteCtrl.modificar()}" />
 						</h:form>
 
 						</form>

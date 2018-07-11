@@ -532,19 +532,15 @@
 						<div class="row">
 
 							<div class="col-xs-12 col-sm-2 col-md-2 dashboard-nav">
-								<ul class="nav nav-tabs nav-stacked text-center">
-									<li><a href="dashboard.html"><span><i
-												class="fa fa-cogs"></i></span>Dashboard</a></li>
-									<li><a href="user-profile.html"><span><i
-												class="fa fa-user"></i></span>Profile</a></li>
-									<li><a href="booking.html"><span><i
-												class="fa fa-briefcase"></i></span>Booking</a></li>
-									<li><a href="wishlist.html"><span><i
-												class="fa fa-heart"></i></span>Wishlist</a></li>
-									<li class="active"><a href="#"><span><i
-												class="fa fa-credit-card"></i></span>My Cards</a></li>
-								</ul>
-							</div>
+                                		<ul class="nav nav-tabs nav-stacked text-center">
+                                			<li><a href="user-profile.xhtml"><span><i class="fa fa-user"></i></span>Mi Perfil</a></li>
+                                    		<li calss="active"><a href="#"><span><i class="fa fa-cogs"></i></span>Gestion de Eventos</a></li>                                        	
+                                            <li><a href="gestionarHoteles.xhtml"><span><i class="fa fa-briefcase"></i></span>Gestion de Hoteles</a></li>
+                                            <li><a href="gestionarPaqeuetes.xhtml"><span><i class="fa fa-briefcase"></i></span>Gestion de Paquetes</a></li>
+                                            <!--li><a href="wishlist.xhtml"><span><i class="fa fa-heart"></i></span>Wishlist</a></li-->
+                                            <li><a href="registrationAdmin.xhtml"><span><i class="fa fa-credit-card"></i></span>Alta Administradores</a></li>
+                                        </ul>
+                                    </div><!-- end columns -->
 							<!-- end columns -->
 
 
@@ -1070,7 +1066,7 @@
 
 					<h:form>
 						<p:commandButton value="Guardar Cambios"
-							styleClass="btn btn-orange" action="#{eventoCtrl.update}" />
+							styleClass="btn btn-orange" action="#{eventoCtrl.modificar}" />
 					</h:form>
 					
 					</form>
