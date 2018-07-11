@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"> 
+      xmlns:h="http://java.sun.com/jsf/html"> 
 
 <h:head>
 
@@ -69,12 +67,11 @@
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <div id="links">
                             <ul class="list-unstyled list-inline">
-                                <li><h:form>
-	                                	<h:commandLink action="#{loginBean.cerrarSesion()}" >
-	                                		<span><i class="fa fa-lock"></i></span>Logout
-	                                	</h:commandLink>
-	                                </h:form></li>
-                                
+                               <li><h:form>
+                                        <h:commandLink action="#{loginBean.cerrarSesion()}" >
+                                            <span><i class="fa fa-lock"></i></span>Logout
+                                        </h:commandLink>
+                                    </h:form></li>
                                 <li>
                                 	<form>
                                     	<ul class="list-inline">
@@ -378,36 +375,36 @@
         
         <!--===== INNERPAGE-WRAPPER ====-->
         <section class="innerpage-wrapper">
-        	<div id="dashboard" class="innerpage-section-padding">
+            <div id="dashboard" class="innerpage-section-padding">
                 <div class="container">
                     <div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        	<div class="dashboard-heading">
-                                <h2>Travel <span>Profile</span></h2>
-                                <p>Hola mi Hermanaso, todo tranqui?</p><h:outputLabel value="#{loginBean.clienteResguardo.nombre}"/>
-                                <p>All your trips booked with us will appear here and you'll be able to manage everything!</p>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="dashboard-heading">
+                                <h2>FanTur <span>Perfil</span></h2>
+                                <p>Hola mi Hermanaso, todo tranqui? <h:outputLabel value="#{loginBean.clienteResguardo.nombre}"/></p>
+                                
                             </div><!-- end dashboard-heading -->
                             
                             <div class="dashboard-wrapper">
-                            	<div class="row">
+                                <div class="row">
                                 
-                                	<div class="col-xs-12 col-sm-2 col-md-2 dashboard-nav">
-                                		<ul class="nav nav-tabs nav-stacked text-center">
-                                    		<li><a href="dashboard.xhtml"><span><i class="fa fa-cogs"></i></span>Dashboard</a></li>
-                                        	<li class="active"><a href="#"><span><i class="fa fa-user"></i></span>Profile</a></li>
-                                            <li><a href="booking.xhtml"><span><i class="fa fa-briefcase"></i></span>Booking</a></li>
-                                            <li><a href="wishlist.xhtml"><span><i class="fa fa-heart"></i></span>Wishlist</a></li>
-                                            <li><a href="cards.xhtml"><span><i class="fa fa-credit-card"></i></span>My Cards</a></li>
+                                    <div class="col-xs-12 col-sm-2 col-md-2 dashboard-nav">
+                                        <ul class="nav nav-tabs nav-stacked text-center">
+                                            <li class="active"><a href="#"><span><i class="fa fa-user"></i></span>Mi Perfil</a></li>
+                                            <li><a href="reservarPaquetes"><span><i class="fa fa-cogs"></i></span>Paquetes Disponibles</a></li>                                         
+                                            <li><a href="verReservas.xhtml"><span><i class="fa fa-briefcase"></i></span>Mis Reservas</a></li>
+                                            <!-- li><a href="wishlist.xhtml"><span><i class="fa fa-heart"></i></span>Wishlist</a></li-->
+                                            <!--  li><a href="cards.xhtml"><span><i class="fa fa-credit-card"></i></span>My Cards</a></li-->
                                         </ul>
                                     </div><!-- end columns -->
                                     
                                     <div class="col-xs-12 col-sm-10 col-md-10 dashboard-content user-profile">
-                                		<h2 class="dash-content-title">Mi Perfil</h2>
+                                        <h2 class="dash-content-title">Mi Perfil</h2>
                                         <div class="panel panel-default">
                                             <div class="panel-heading"><h4>Detalles del Perfil</h4></div>
                                             <div class="panel-body">
-                                            	<div class="row">
-                                                	<div class="col-sm-5 col-md-4 user-img">
+                                                <div class="row">
+                                                    <div class="col-sm-5 col-md-4 user-img">
                                                         <img src="resources/images/user-profile.jpg" class="img-responsive" alt="user-img" />
                                                     </div><!-- end columns -->
                                                     
@@ -415,17 +412,20 @@
                                                         <ul class="list-unstyled">
                                                             <li><span>Nombre: </span><h:outputLabel value="#{loginBean.clienteResguardo.nombre}" /></li>
                                                             <li><span>Apellido: </span><h:outputLabel value="#{loginBean.clienteResguardo.apellido}" /></li>
-                                                            <li><span>Usuario</span><h:outputLabel value="#{loginBean.clienteResguardo.user}" /></li>
+                                                            <li><span>Usuario: </span><h:outputLabel value="#{loginBean.clienteResguardo.user}" /></li>
                                                             <li><span>Email: </span><h:outputLabel value="#{loginBean.clienteResguardo.contacto.email}" /></li>
                                                             <li><span>Phone:</span><h:outputLabel value="#{loginBean.clienteResguardo.contacto.telefono}" /></li>
                                                             
                                                         </ul>
-                                                        <button class="btn" data-toggle="modal" data-target="#edit-profile">Edit Profile</button>
-                                                   	</div><!-- end columns -->
+                                                        <button class="btn" data-toggle="modal" data-target="#edit-profile">Editar Perfil</button>
+                                                         <h:form>
+                                                         <p:commandButton value="Borrar Cuenta" class="btn" actionListener="#{loginBean.eliminarCliente()}"/>
+                                                        </h:form>
+                                                    </div><!-- end columns -->
                                                     
                                                     <div class="col-sm-12 user-desc">
-                                                    	<h4>About You</h4>
-                                                    	<p>Vestibulum tristique, justo eu sollicitudin sagittis, metus dolor eleifend urna, quis scelerisque purus quam nec ligula. Suspendisse iaculis odio odio, ac vehicula nisi faucibus eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere semper sem ac aliquet. Duis vel bibendum tellus, eu hendrerit sapien. Proin fringilla, enim vel lobortis viverra, augue orci fringilla diam, sed cursus elit mi vel lacus. Nulla facilisi. Fusce sagittis, magna non vehicula gravida, ante arcu pulvinar arcu, aliquet luctus arcu purus sit amet sem. Mauris blandit odio sed nisi porttitor egestas. Mauris in quam interdum purus vehicula rutrum quis in sem. Integer interdum lectus at nulla dictum luctus. Sed risus felis, posuere id condimentum non, egestas pulvinar enim. Praesent pretium risus eget nisi ullamcorper fermentum. Duis lacinia nisi ac rhoncus vestibulum.</p>
+                                                        <h4>About You</h4>
+                                                        <!-- p>Vestibulum tristique, justo eu sollicitudin sagittis, metus dolor eleifend urna, quis scelerisque purus quam nec ligula. Suspendisse iaculis odio odio, ac vehicula nisi faucibus eu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere semper sem ac aliquet. Duis vel bibendum tellus, eu hendrerit sapien. Proin fringilla, enim vel lobortis viverra, augue orci fringilla diam, sed cursus elit mi vel lacus. Nulla facilisi. Fusce sagittis, magna non vehicula gravida, ante arcu pulvinar arcu, aliquet luctus arcu purus sit amet sem. Mauris blandit odio sed nisi porttitor egestas. Mauris in quam interdum purus vehicula rutrum quis in sem. Integer interdum lectus at nulla dictum luctus. Sed risus felis, posuere id condimentum non, egestas pulvinar enim. Praesent pretium risus eget nisi ullamcorper fermentum. Duis lacinia nisi ac rhoncus vestibulum.</p -->
                                                     
                                                     </div><!-- end columns -->
                                                 </div><!-- end row -->
@@ -544,67 +544,37 @@
         <div id="edit-profile" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">Editar Perfil</h3>
+                        <h3 class="modal-title">Edit Profile</h3>
                     </div><!-- end modal-header -->
                     
                     <div class="modal-body">
-                   
                         <form>
-                        	<div class="form-group">
-                        		<h:outputText value="Nombre"/>
-                            	<h:inputText value="#{loginBean.clienteResguardo.nombre}" a:placeholder="Nombre" class="form-control"/>
-                            </div><!-- end form-group -->
-                            
-                        	<div class="form-group">
-                        		<h:outputLabel value="Apllido" />
-                            	<h:inputText value="#{loginBean.clienteResguardo.apellido}" a:placeholder="Apellido" class="form-control"  />
+                            <div class="form-group">
+                                <h:outputLabel value="Nombre" />
+                                <h:inputText value="#{loginBean.clienteResguardo.nombre}" a:placeholder="Name" class="form-control" />
                             </div><!-- end form-group -->
                             
                             <div class="form-group">
-                        		<h:outputText value="User" />
-                            	<h:inputText value="#{loginBean.clienteResguardo.user}" a:placeholder="Nombre de Usuario" class="form-control"  />
+                                <h:outputLabel value="Apellido" />
+                                <h:inputText value="#{loginBean.clienteResguardo.apellido}" a:placeholder="Apellido" class="form-control"  />
                             </div><!-- end form-group -->
                             
                             <div class="form-group">
-                        		<h:outputLabel value="Contraseña" />
-                            	<h:inputText value="#{loginBean.clienteResguardo.password}" a:placeholder="Contraseña" class="form-control" />
-                            </div><!-- end form-group -->
-							
-                            <div class="form-group">
-                        		<h:outputLabel value="Fecha de Nacimiento" />
-                            	<h:inputText value="#{loginBean.clienteResguardo.nacimiento}"  a:placeholder="Fecha de Nacimiento" class="form-control"  />
-                            </div><!-- end form-group -->
+                                <h:outputLabel value="Usuario" />
+                                <h:inputText value="#{loginBean.clienteResguardo.user}" a:placeholder="Usuario" class="form-control"  />
+                            </div><!-- end form-group -->                           
                             
-                            <div class="form-group">
-                        		<h:outputLabel value="Email" />
-                            	<h:inputText value="#{loginBean.clienteResguardo.contacto.email}" a:placeholder="Email" class="form-control"  />
-                            </div><!-- end form-group -->
-                            
-                             <div class="form-group">
-                        		<h:outputLabel value="Pagina Web" />
-                            	<h:inputText value="#{loginBean.clienteResguardo.contacto.website}" a:placeholder="Pagina Web" class="form-control"  />
-                            </div><!-- end form-group -->
-                            
-                             <div class="form-group">
-                        		<h:outputLabel value="Telefono" />               	
-                            	<h:inputText value="#{loginBean.clienteResguardo.contacto.telefono}" a:placeholder="Telefono" class="form-control"  />
-                            </div><!-- end form-group -->           
-                                              
-                                                                             
-                        </form>    
-                        
-                        <h:form>
+                         <h:form>                           
                             <h:commandButton value="Guardar Cambios" styleClass="btn btn-orange" actionListener="#{loginBean.modificarCliente()}" />
-                           </h:form>                        
+                        </h:form>
+                        </form>
                         
-                              
+                      
+                        
                     </div><!-- end modal-bpdy -->
-                   
                 </div><!-- end modal-content -->
-               
             </div><!-- end modal-dialog -->
         </div><!-- end edit-profile -->
         

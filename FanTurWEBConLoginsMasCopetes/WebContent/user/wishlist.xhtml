@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:h="http://java.sun.com/jsf/html"> 
 
 <h:head>
 
@@ -402,13 +400,10 @@
 										<div class="table-responsive">
                                             <table class="table table-hover">
                                                 <tbody>
-                                                   
-                                                   <ui:repeat var="paquete" value="#{paqueteCont.todoslospaquetes}">
                                                     <tr class="list-content">
-                                                    
                                                         <td class="list-img wishlist-img"><img src="resources/images/wishlist.jpg" class="img-responsive" alt="wishlist-img" /></td>
                                                         <td class="list-text wishlist-text">
-                                                            <h3>Paquete
+                                                            <h3>Grand Lilly
                                                             	<span class="rating">
                                                                     <i class="fa fa-star orange"></i>
                                                                     <i class="fa fa-star orange"></i>
@@ -418,30 +413,72 @@
                                                                 </span>
                                                             </h3>
                                                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                                            <p class="order"><span>Order Total: </span><h:outputLabel value="#{paquete.precio}" /></p>
-                                                            
-                                                            
-                                                            <h:form>														
-														<a class="btn" jsfc="h:commandLink" type="button" actionListener="#{reservaCtrl.setPaquete(paquete)}">														
-														<f:passThroughAttribute name="data-toggle" value="modal" />
-														<f:passThroughAttribute name="data-target" value="#edit-card" />
-														<f:ajax/> 
-														<span><i class="fa fa-pencil"></i></span> 														
-														</a>														
-														</h:form>
-                                                            
-                                                            	
-                                                            
-                                                           
-                                                                                                                      
+                                                            <p class="order"><span>Order Total:</span> $548</p>
+                                                            <button class="btn btn-orange">Book Now</button>
+                                                            <button class="btn btn-lightgrey visible-sm pull-right">Remove</button>
                                                         </td>
                                                         <td class="wishlist-btn hidden-sm"><button class="btn btn-lightgrey">Remove</button></td>
-                                                          
-                                                    </tr>   
-                                                    </ui:repeat>              
-                                                   
-                                                  
+                                                    </tr>
                                                     
+                                                    <tr class="list-content">
+                                                        <td class="list-img wishlist-img"><img src="resources/images/wishlist.jpg" class="img-responsive" alt="wishlist-img" /></td>
+                                                        <td class="list-text wishlist-text">
+                                                            <h3>Grand Lilly
+                                                            	<span class="rating">
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star lightgrey"></i>
+                                                                </span>
+                                                            </h3>
+                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                                            <p class="order"><span>Order Total:</span> $548</p>
+                                                            <button class="btn btn-orange">Book Now</button>
+                                                            <button class="btn btn-lightgrey visible-sm pull-right">Remove</button>
+                                                        </td>
+                                                        <td class="wishlist-btn hidden-sm"><button class="btn btn-lightgrey">Remove</button></td>
+                                                    </tr>
+                                                    
+                                                    <tr class="list-content">
+                                                        <td class="list-img wishlist-img"><img src="resources/images/wishlist.jpg" class="img-responsive" alt="wishlist-img" /></td>
+                                                        <td class="list-text wishlist-text">
+                                                            <h3>Grand Lilly
+                                                            	<span class="rating">
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star lightgrey"></i>
+                                                                </span>
+                                                            </h3>
+                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                                            <p class="order"><span>Order Total:</span> $548</p>
+                                                            <button class="btn btn-orange">Book Now</button>
+                                                            <button class="btn btn-lightgrey visible-sm pull-right">Remove</button>
+                                                        </td>
+                                                        <td class="wishlist-btn hidden-sm"><button class="btn btn-lightgrey">Remove</button></td>
+                                                    </tr>
+                                                    
+                                                    <tr class="list-content">
+                                                        <td class="list-img wishlist-img"><img src="resources/images/wishlist.jpg" class="img-responsive" alt="wishlist-img" /></td>
+                                                        <td class="list-text wishlist-text">
+                                                            <h3>Grand Lilly
+                                                            	<span class="rating">
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star orange"></i>
+                                                                    <i class="fa fa-star lightgrey"></i>
+                                                                </span>
+                                                            </h3>
+                                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                                            <p class="order"><span>Order Total:</span> $548</p>
+                                                            <button class="btn btn-orange">Book Now</button>
+                                                            <button class="btn btn-lightgrey visible-sm pull-right">Remove</button>
+                                                        </td>
+                                                        <td class="wishlist-btn hidden-sm"><button class="btn btn-lightgrey">Remove</button></td>
+                                                    </tr>
                                                  </tbody>
                                              </table>
                                         </div><!-- end table-responsive -->
@@ -454,64 +491,6 @@
                 </div><!-- end container -->          
             </div><!-- end dashboard -->
         </section><!-- end innerpage-wrapper -->
-        
-        
-        
-        
-        
-        
-        
-        
-        
-     <div id="edit-card" class="modal custom-modal fade" role="dialog">
-		<div class="modal-dialog">
-		
-			<div class="modal-content">
-			<h:form id="form">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title">Desea reservar el Paquete?</h3>
-				</div>
-				<!-- end modal-header -->
-
-				<div class="modal-body">
-					<form>
-						<form>
-						
-
-						<div class="row">
-							
-							
-							
-							
-							
-						</div>
-						<!-- end row -->
-
-						
-						
-						<h:form>
-							<p:commandButton value="ACEPTAR RESERVA" styleClass="btn btn-orange"
-								action="#{reservaCtrl.crearReserva()}" />
-						</h:form>
-					
-					</form>
-						
-						
-					 	</form>
-					   
-				</div>
-				<!-- end modal-bpdy -->
-				</h:form>
-			</div>
-			<!-- end modal-content -->
-		</div>
-		<!-- end modal-dialog -->
-	</div>
-        
-        
-        
-        
 
         
         <!--========================= NEWSLETTER-1 ==========================-->

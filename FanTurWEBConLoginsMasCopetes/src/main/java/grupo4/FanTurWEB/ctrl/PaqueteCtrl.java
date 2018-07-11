@@ -41,6 +41,9 @@ public class PaqueteCtrl extends Ctrl<Paquete> implements Serializable{
 	
 	private List<Evento> eventosAsignados;
 	
+	private List<Hotel>hotelesAsignados2;
+	private List<Evento> eventosAsignados2;
+	
 	//private EventoCtrl eventoCtrl;
 	
 	@EJB
@@ -310,6 +313,10 @@ public class PaqueteCtrl extends Ctrl<Paquete> implements Serializable{
 	    }
 	}
 	
-	
+	public void empezarModificacion(Paquete paquete) {
+		modelObj = paquete;
+		hotelesAsignados2 = new ArrayList<Hotel>(modelObj.getAlojamiento().getHoteles());
+		eventosAsignados2 = new ArrayList<Evento>(modelObj.getEventos());
+	}
 	
 }

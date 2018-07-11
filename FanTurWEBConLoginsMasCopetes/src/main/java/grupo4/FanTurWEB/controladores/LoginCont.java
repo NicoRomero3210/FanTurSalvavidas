@@ -177,5 +177,15 @@ public class LoginCont implements Serializable {
 		clienteEJB.update(clienteResguardo.getId(), clienteResguardo);		
 		this.cerrarSesion();
 	}
+	
+	public void eliminarCliente() {
+		clienteEJB.delete(clienteResguardo);
+		this.cerrarSesion();
+	}
+	
+	public void eliminarAdmin() {
+		adminEJB.delete(adminResguardo);
+		this.cerrarSesion();
+	}
 
 }

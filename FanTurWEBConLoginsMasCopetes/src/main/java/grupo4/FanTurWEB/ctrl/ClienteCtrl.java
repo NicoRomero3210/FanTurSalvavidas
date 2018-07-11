@@ -1,6 +1,8 @@
 package grupo4.FanTurWEB.ctrl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -20,10 +22,6 @@ public class ClienteCtrl extends Ctrl<Cliente> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Contacto contacto;
-	private Reserva reserva;
-	private Paquete paquete;
-	
-	
 	
 		@Override
 		protected Class<Cliente> getClase() {
@@ -39,18 +37,10 @@ public class ClienteCtrl extends Ctrl<Cliente> implements Serializable{
 			webTarget = client.target("http://localhost:8080/FanTurWEB/rest/clientes");
 			modelObj.setRol("USER");
 			contacto = new Contacto();
-			modelObj.setContacto(contacto);
-			reserva = new Reserva();
-			paquete = new Paquete();
+			modelObj.setContacto(contacto);			
 		}
 
-		public Paquete getPaquete() {
-			return paquete;
-		}
-
-		public void setPaquete(Paquete paquete) {
-			this.paquete = paquete;
-		}
+	
 
 		@Override
 		public String getId(Cliente cliente) {
@@ -64,31 +54,7 @@ public class ClienteCtrl extends Ctrl<Cliente> implements Serializable{
 
 		public void setContacto(Contacto contacto) {
 			this.contacto = contacto;
-		}
-
-		public Reserva getReserva() {
-			return reserva;
-		}
-
-		public void setReserva(Reserva reserva) {
-			this.reserva = reserva;
-		}
-		
-		
-		
-		
-		
-		public void reservarPaquete() {			
-			String nombre = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-			modelObj = this.getByUser(nombre);
-			modelObj.reservar(paquete, reserva);
-			this.create();
-			
-			
-		}
-		
-		
-		
+		}		
 		
 		public Cliente getByUser(String user) {
 			invocation = webTarget.path(user).request().buildGet();
@@ -97,5 +63,14 @@ public class ClienteCtrl extends Ctrl<Cliente> implements Serializable{
 			return cli;
 				
 		}
+		
+	
+			
+		
+		
+		
+		
+		
+		
 		
 }
